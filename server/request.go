@@ -6,16 +6,17 @@ import (
 	"net/http"
 )
 
-func RequestGet(url string) {
+func RequestGet(url string) []byte {
 	resp, err := http.Get(url)
 
 	if err != nil {
 		fmt.Println(err)
-		return
+		return []byte("fatal")
 	}
 
 	defer resp.Body.Close()
 
-	byteArray, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(byteArray)) // htmlをstringで取得
+	b, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(b)) // htmlをstringで取得
+	return b
 }
